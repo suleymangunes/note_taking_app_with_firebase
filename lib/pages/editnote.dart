@@ -1,22 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
-
-class AddNote extends StatefulWidget {
-  const AddNote({Key? key}) : super(key: key);
+class EditNote extends StatefulWidget {
+  final data;
+  const EditNote(this.data, {Key? key}) : super(key: key);
 
   @override
-  State<AddNote> createState() => _AddNoteState();
+  State<EditNote> createState() => _EditNoteState();
 }
 
-class _AddNoteState extends State<AddNote> {
-
+class _EditNoteState extends State<EditNote> {
+  
   final _formKey = GlobalKey<FormState>();
   CollectionReference db = FirebaseFirestore.instance.collection("notes");
 
   TextEditingController title = TextEditingController();
   TextEditingController note = TextEditingController();
+
+  @override
+  void initState() {
+    title = TextEditingController(text: widget.data["baslik"]);
+    note = TextEditingController(text: widget.data["icerik"]);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

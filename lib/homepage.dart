@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_uygulamasi/pages/addnote.dart';
+import 'package:not_uygulamasi/pages/editnote.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -36,6 +37,7 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: ((context, index) {
               return GestureDetector(
                 onTap: (() {
+                  Get.to(EditNote(snapshot.data.docs[index].data()));
                   print(snapshot.data.docs[0].data());
                 }),
                 child: Card(
