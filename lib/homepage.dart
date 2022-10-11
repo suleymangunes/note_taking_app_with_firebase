@@ -17,26 +17,44 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber,
       appBar: AppBar(
         title: const Text('Title'),
       ),
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              db.add({
-                "baslik": "merhaba ilk notum",
-                "icerik": "merhaba ilk notumun icerigi"
-              // ignore: void_checks
-              }).whenComplete(() {
-                return Navigator.pop;
-              }).whenComplete(() => print("eklendi"));
-            },
-            child: const Text(
-              "ekle"
-            ),
-          )
-        ],
+      body: StreamBuilder<Object>(
+        stream: db.snapshots(),
+        builder: (context, AsyncSnapshot snapshot) {
+          return GridView.builder(
+            physics: const BouncingScrollPhysics(),
+            itemCount: snapshot.hasData 
+            ?
+            snapshot.data.docs.length
+            :
+            0
+            ,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
+            itemBuilder: ((context, index) {
+              return GestureDetector(
+                onTap: (() {
+                  print(snapshot.data.docs[0].data());
+                }),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)
+                  ),
+                  elevation: 10,
+                  margin: const EdgeInsets.all(30),
+                  child: Column(
+                    children: [
+                      Text(snapshot.data.docs[index].data()["baslik"].toString()),
+                      Text(snapshot.data.docs[index].data()["icerik"].toString())
+                    ],
+                  ),
+                ),
+              );
+            })
+          );
+        }
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (() {
