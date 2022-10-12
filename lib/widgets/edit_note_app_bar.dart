@@ -55,7 +55,7 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
   );
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +69,17 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
       },
       child: AppBar(
         actions: [
+          IconButton(
+            onPressed: (() {
+              
+            }), 
+            icon: data["archive"] == true 
+            ? 
+            Icon(Icons.archive_rounded, size: Get.width * 0.07)
+            :
+            Icon(Icons.archive_outlined, size: Get.width * 0.07)
+          )
+          ,
           IconButton(
             onPressed: (() {
               if(title.text.isEmpty && note.text.isEmpty){
@@ -119,7 +130,8 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
               );
             }), 
             icon: Icon(Icons.delete_forever_rounded, size: Get.width * 0.07,)
-          )
+          ),
+          
     
           // ElevatedButton(
           //   style: ButtonStyle(

@@ -12,11 +12,12 @@ class CardDesign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      // color: Colors.blueGrey,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20)
       ),
       elevation: 10,
-      // color: Color.fromARGB(255, 237, 240, 255),
+      color: Color.fromARGB(255, 237, 240, 255),
       margin: EdgeInsets.all(Get.width * 0.05),
       child: Container(
         margin: const EdgeInsets.all(10),
@@ -27,7 +28,7 @@ class CardDesign extends StatelessWidget {
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: Get.width * 0.045
+                fontSize: Get.width * 0.045,
               ),
             ),
             SizedBox(
