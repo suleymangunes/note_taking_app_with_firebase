@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: ((context, index) {
               return GestureDetector(
                 onTap: (() {
-                  Get.to(EditNote(snapshot.data.docs[index].data()));
+                  Get.to(EditNote(data: snapshot.data.docs[index]));
                   print(snapshot.data.docs[0].data());
                 }),
                 child: Card(

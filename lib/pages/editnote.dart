@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:not_uygulamasi/pages/forms/edit_form.dart';
 
 class EditNote extends StatefulWidget {
-  final data;
-  const EditNote(this.data, {Key? key}) : super(key: key);
+  final DocumentSnapshot data;
+  const EditNote( {Key? key, required this.data}) : super(key: key);
 
   @override
   State<EditNote> createState() => _EditNoteState();
@@ -39,65 +38,27 @@ class _EditNoteState extends State<EditNote> {
               elevation: MaterialStateProperty.all(0),
             ),
             onPressed: (() {
-              db.add({
+              widget.data.reference.update({
                 "baslik": title.text,
                 "icerik": note.text
-              // ignore: void_checks
               }).whenComplete(() => Navigator.pop(context)).
-              whenComplete(() => Get.snackbar(
-              "GeeksforGeeks",
-               "Hello everyone",
-               icon: Icon(Icons.person, color: Colors.white),
-               snackPosition: SnackPosition.BOTTOM,
-                 
+              whenComplete(() =>  Get.snackbar(
+                "",
+                "",
+                titleText: const Text("Güncellendi"),
+                messageText: const Text("Başarılı"),
+                icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
+                backgroundColor: Colors.white,
+                snackPosition: SnackPosition.TOP,
+                animationDuration: const Duration(seconds: 1),
                ));
             }), 
-            child: Text("kaydet")
+            child: const Text("guncelle")
           )
         ],
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            Expanded(
-              flex: 1,
-              child: SizedBox(
-                width: Get.width * 0.95,
-                child: TextFormField(
-                  style: TextStyle(
-                    fontSize: Get.width * 0.06
-                  ),
-                  maxLines: null,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Title",
-                  ),
-                  controller: title,
-                ),
-              ),
-            ),
-            Divider(),
-            Expanded(
-              flex: 9,
-              child: SizedBox(
-                width: Get.width * 0.95,
-                child: TextFormField(
-                  style: TextStyle(
-                    fontSize: Get.width * 0.05
-                  ),
-                  maxLines: null,
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Note"
-                ),
-                controller: note,
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
+      body: EditForm(formKey: _formKey, title: title, note: note),
     );
   }
 }
+

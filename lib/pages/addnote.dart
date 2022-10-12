@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:not_uygulamasi/pages/forms/add_form.dart';
 
 
 class AddNote extends StatefulWidget {
@@ -36,59 +37,22 @@ class _AddNoteState extends State<AddNote> {
               // ignore: void_checks
               }).whenComplete(() => Navigator.pop(context)).
               whenComplete(() => Get.snackbar(
-              "GeeksforGeeks",
-               "Hello everyone",
-               icon: Icon(Icons.person, color: Colors.white),
-               snackPosition: SnackPosition.BOTTOM,
-                 
+                "",
+                "",
+                titleText: const Text("Kaydedildi"),
+                messageText: const Text("Başarılı"),
+                icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
+                backgroundColor: Colors.white,
+                snackPosition: SnackPosition.TOP,
+                animationDuration: const Duration(seconds: 1),
                ));
             }), 
-            child: Text("kaydet")
+            child: const Text("kaydet")
           )
         ],
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            Expanded(
-              flex: 1,
-              child: SizedBox(
-                width: Get.width * 0.95,
-                child: TextFormField(
-                  style: TextStyle(
-                    fontSize: Get.width * 0.06
-                  ),
-                  maxLines: null,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Title",
-                  ),
-                  controller: title,
-                ),
-              ),
-            ),
-            Divider(),
-            Expanded(
-              flex: 9,
-              child: SizedBox(
-                width: Get.width * 0.95,
-                child: TextFormField(
-                  style: TextStyle(
-                    fontSize: Get.width * 0.05
-                  ),
-                  maxLines: null,
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Note"
-                ),
-                controller: note,
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
+      body: AddForm(formKey: _formKey, title: title, note: note),
     );
   }
 }
+
