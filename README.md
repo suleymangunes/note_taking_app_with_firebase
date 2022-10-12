@@ -1,4 +1,4 @@
-# not_uygulamasi
+# Note Taking App
 
 A new Flutter project.
 
