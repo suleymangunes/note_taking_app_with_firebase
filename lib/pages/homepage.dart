@@ -1,8 +1,10 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_uygulamasi/pages/addnote.dart';
 import 'package:not_uygulamasi/pages/editnote.dart';
+import 'package:not_uygulamasi/widgets/card_design.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,16 +16,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   CollectionReference db = FirebaseFirestore.instance.collection("notes");
+  var _bottomNavIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
       appBar: AppBar(
-        title: const Text('Title'),
+        title: const Text('Note Taking App'),
       ),
       body: StreamBuilder<Object>(
-        stream: db.snapshots(),
+        stream: db.orderBy("tarih", descending: true).snapshots(),
         builder: (context, AsyncSnapshot snapshot) {
           return GridView.builder(
             physics: const BouncingScrollPhysics(),
@@ -40,19 +42,10 @@ class _HomePageState extends State<HomePage> {
                   Get.to(EditNote(data: snapshot.data.docs[index]));
                   print(snapshot.data.docs[0].data());
                 }),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)
-                  ),
-                  elevation: 10,
-                  margin: const EdgeInsets.all(30),
-                  child: Column(
-                    children: [
-                      Text(snapshot.data.docs[index].data()["baslik"].toString()),
-                      Text(snapshot.data.docs[index].data()["icerik"].toString())
-                    ],
-                  ),
-                ),
+                child: CardDesign(
+                  snapshot.data.docs[index].data()["baslik"].toString(),
+                  snapshot.data.docs[index].data()["icerik"].toString()
+                )
               );
             })
           );
@@ -64,6 +57,23 @@ class _HomePageState extends State<HomePage> {
         }),
         child: const Icon(Icons.add),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+      icons: <IconData>[
+        Icons.brightness_5,
+        Icons.brightness_4,
+        Icons.brightness_6,
+        Icons.brightness_7,
+      ],
+      activeIndex: _bottomNavIndex,
+      gapLocation: GapLocation.center,
+      notchSmoothness: NotchSmoothness.verySmoothEdge,
+      leftCornerRadius: 32,
+      rightCornerRadius: 32,
+      onTap: (index) => setState(() => _bottomNavIndex = index),
+      //other params
+   ),
     );
   }
 }
+

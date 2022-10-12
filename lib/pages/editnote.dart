@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:not_uygulamasi/pages/forms/edit_form.dart';
+import 'package:not_uygulamasi/widgets/edit_form.dart';
+import 'package:not_uygulamasi/widgets/edit_note_app_bar.dart';
 
 class EditNote extends StatefulWidget {
   final DocumentSnapshot data;
@@ -30,35 +30,8 @@ class _EditNoteState extends State<EditNote> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text('not ekle'),
-        actions: [
-          ElevatedButton(
-            style: ButtonStyle(
-              elevation: MaterialStateProperty.all(0),
-            ),
-            onPressed: (() {
-              widget.data.reference.update({
-                "baslik": title.text,
-                "icerik": note.text
-              }).whenComplete(() => Navigator.pop(context)).
-              whenComplete(() =>  Get.snackbar(
-                "",
-                "",
-                titleText: const Text("Güncellendi"),
-                messageText: const Text("Başarılı"),
-                icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
-                backgroundColor: Colors.white,
-                snackPosition: SnackPosition.TOP,
-                animationDuration: const Duration(seconds: 1),
-               ));
-            }), 
-            child: const Text("guncelle")
-          )
-        ],
-      ),
-      body: EditForm(formKey: _formKey, title: title, note: note),
+      appBar: EditPageAppBar( title: title, note: note, widget: widget, data:widget.data),
+      body: EditForm(formKey: _formKey, title: title, note: note, data:widget.data),
     );
   }
 }
-

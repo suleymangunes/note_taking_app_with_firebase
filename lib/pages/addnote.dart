@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:not_uygulamasi/pages/forms/add_form.dart';
+import 'package:not_uygulamasi/widgets/add_form.dart';
+import 'package:not_uygulamasi/widgets/add_page_app_bar.dart';
 
 
 class AddNote extends StatefulWidget {
@@ -23,36 +24,8 @@ class _AddNoteState extends State<AddNote> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text('not ekle'),
-        actions: [
-          ElevatedButton(
-            style: ButtonStyle(
-              elevation: MaterialStateProperty.all(0),
-            ),
-            onPressed: (() {
-              db.add({
-                "baslik": title.text,
-                "icerik": note.text
-              // ignore: void_checks
-              }).whenComplete(() => Navigator.pop(context)).
-              whenComplete(() => Get.snackbar(
-                "",
-                "",
-                titleText: const Text("Kaydedildi"),
-                messageText: const Text("Başarılı"),
-                icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
-                backgroundColor: Colors.white,
-                snackPosition: SnackPosition.TOP,
-                animationDuration: const Duration(seconds: 1),
-               ));
-            }), 
-            child: const Text("kaydet")
-          )
-        ],
-      ),
+      appBar: AddPageAppBar(db: db, title: title, note: note),
       body: AddForm(formKey: _formKey, title: title, note: note),
     );
   }
 }
-

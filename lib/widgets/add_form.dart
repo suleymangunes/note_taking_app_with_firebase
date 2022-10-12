@@ -25,7 +25,7 @@ class AddForm extends StatelessWidget {
               width: Get.width * 0.95,
               child: TextFormField(
                 style: TextStyle(
-                  fontSize: Get.width * 0.06
+                  fontSize: Get.width * 0.07
                 ),
                 maxLines: null,
                 decoration: const InputDecoration(
@@ -33,6 +33,12 @@ class AddForm extends StatelessWidget {
                   hintText: "Title",
                 ),
                 controller: title,
+                validator: ((value) {
+                  if (title.text.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                }),
               ),
             ),
           ),
@@ -54,6 +60,12 @@ class AddForm extends StatelessWidget {
                 hintText: "Note"
               ),
               controller: note,
+              validator: ((value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              }),
               ),
             ),
           )
