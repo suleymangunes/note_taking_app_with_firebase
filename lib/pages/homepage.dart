@@ -114,6 +114,11 @@ class _HomePageState extends State<HomePage> {
               size: Get.width * 0.07,
             )
           ),
+          // title: TextField(
+          //   onChanged: ((value) {
+          //     controllerSelect.searchfield.value = value;
+          //   }),
+          // ),
           title: const Text(
             'Note Taking App',
             style: TextStyle(
@@ -130,14 +135,9 @@ class _HomePageState extends State<HomePage> {
           actions: [
             Padding(
               padding: EdgeInsets.only(right: Get.width * 0.02),
-              child: IconButton(
-                onPressed: (() {
-                  
-                }),
-                icon: Icon(
-                  Icons.search_outlined,
-                  size: Get.width * 0.07,
-                ),
+              child: Icon(
+                Icons.apple_rounded,
+                size: Get.width * 0.07,
               ),
             )
           ],

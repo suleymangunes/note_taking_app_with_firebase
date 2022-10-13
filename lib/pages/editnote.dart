@@ -30,7 +30,7 @@ class _EditNoteState extends State<EditNote> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: EditPageAppBar( title: title, note: note, widget: widget, data:widget.data),
+      appBar: EditPageAppBar( title: title, note: note, widget: widget, data:widget.data, db: db),
       body: EditForm(formKey: _formKey, title: title, note: note, data:widget.data),
     );
   }
