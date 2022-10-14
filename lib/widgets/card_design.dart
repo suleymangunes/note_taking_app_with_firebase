@@ -17,7 +17,7 @@ class CardDesign extends StatelessWidget {
         borderRadius: BorderRadius.circular(20)
       ),
       elevation: 10,
-      color: Color.fromARGB(255, 237, 240, 255),
+      color: const Color.fromARGB(255, 237, 240, 255),
       margin: EdgeInsets.all(Get.width * 0.05),
       child: Container(
         margin: const EdgeInsets.all(10),

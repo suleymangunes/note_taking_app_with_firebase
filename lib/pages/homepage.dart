@@ -7,6 +7,8 @@ import 'package:not_uygulamasi/pages/addnote.dart';
 import 'package:not_uygulamasi/pages/archivenotepage.dart';
 import 'package:not_uygulamasi/pages/normalnotepage.dart';
 import 'package:not_uygulamasi/widgets/bottom_nav_home.dart';
+import 'package:not_uygulamasi/widgets/drawer_opener.dart';
+import 'package:not_uygulamasi/widgets/home_app_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,12 +18,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  ControllerSelect controllerSelect = Get.put(ControllerSelect());
 
+  ControllerSelect controllerSelect = Get.put(ControllerSelect());
   CollectionReference db = FirebaseFirestore.instance.collection("notes");
   final _advancedDrawerController = AdvancedDrawerController();
 
-
+  void handleMenuButtonPressed() {
+    _advancedDrawerController.value = AdvancedDrawerValue.visible();
+    _advancedDrawerController.showDrawer();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,107 +48,9 @@ class _HomePageState extends State<HomePage> {
         ],
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
-      drawer: SafeArea(
-        child: ListTileTheme(
-          textColor: Colors.white,
-          iconColor: Colors.white,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                width: 128.0,
-                height: 128.0,
-                margin: const EdgeInsets.only(
-                  top: 24.0,
-                  bottom: 64.0,
-                ),
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  color: Colors.black26,
-                  shape: BoxShape.circle,
-                ),
-                // child: Image.asset(
-                //   'assets/images/flutter_logo.png',
-                // ),
-              ),
-              ListTile(
-                onTap: () {},
-                leading: Icon(Icons.home),
-                title: Text('Home'),
-              ),
-              ListTile(
-                onTap: () {},
-                leading: Icon(Icons.account_circle_rounded),
-                title: Text('Profile'),
-              ),
-              ListTile(
-                onTap: () {},
-                leading: Icon(Icons.favorite),
-                title: Text('Favourites'),
-              ),
-              ListTile(
-                onTap: () {},
-                leading: Icon(Icons.settings),
-                title: Text('Settings'),
-              ),
-              Spacer(),
-              DefaultTextStyle(
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.white54,
-                ),
-                child: Container(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 16.0,
-                  ),
-                  child: Text('Terms of Service | Privacy Policy'),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      drawer: DrawerOpener(db),
       child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: (() {
-              _handleMenuButtonPressed();
-            }), 
-            icon: Icon(
-              Icons.menu,
-              size: Get.width * 0.07,
-            )
-          ),
-          // title: TextField(
-          //   onChanged: ((value) {
-          //     controllerSelect.searchfield.value = value;
-          //   }),
-          // ),
-          title: const Text(
-            'Note Taking App',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              shadows: <Shadow>[
-                Shadow(
-                  offset: Offset(1.0, 1.0),
-                  blurRadius: 2.0,
-                  color: Colors.blueGrey,
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: Get.width * 0.02),
-              child: Icon(
-                Icons.apple_rounded,
-                size: Get.width * 0.07,
-              ),
-            )
-          ],
-        ),
-
-
+        appBar: HomeAppBar(handleMenuButtonPressed),
         body: Obx((() {
           return controllerSelect.bottomNavIndex.value == 0 
           ? 
@@ -151,10 +58,6 @@ class _HomePageState extends State<HomePage> {
           : 
           ArchiveNormalPage(db);
         })),
-        
-        
-
-
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.blueGrey,
           onPressed: (() {
@@ -167,13 +70,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BottomNavDesign()
+        bottomNavigationBar: const BottomNavDesign()
       ),
     );
-  }
-  void _handleMenuButtonPressed() {
-    // NOTICE: Manage Advanced Drawer state through the Controller.
-    _advancedDrawerController.value = AdvancedDrawerValue.visible();
-    _advancedDrawerController.showDrawer();
-  }
+  } 
 }

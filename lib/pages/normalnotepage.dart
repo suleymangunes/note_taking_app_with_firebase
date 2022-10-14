@@ -34,7 +34,7 @@ class _NoteNormalPageState extends State<NoteNormalPage> {
           );
         }
         if (snapshot.connectionState == ConnectionState.waiting){
-          CircularProgressIndicator();
+          const CircularProgressIndicator();
         }
         return 
         GridView.builder(

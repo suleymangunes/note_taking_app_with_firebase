@@ -2,6 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_uygulamasi/options/firebase_options.dart';
+import 'package:not_uygulamasi/pages/auth_page.dart';
+import 'package:not_uygulamasi/pages/register_page.dart';
+import 'package:not_uygulamasi/service/auth.dart';
 import 'pages/homepage.dart';
 
 Future<void> main() async {
@@ -9,11 +12,13 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  
+  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +26,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Color.fromARGB(255, 167, 187, 196),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 167, 187, 196),
         appBarTheme: AppBarTheme(
-          iconTheme: IconThemeData(
+          iconTheme: const IconThemeData(
             color: Colors.black
           ),
-          color: Color.fromARGB(255, 167, 187, 196),
+          color: const Color.fromARGB(255, 167, 187, 196),
           elevation: 0,
           centerTitle: true,
           titleTextStyle: TextStyle(
@@ -38,7 +43,12 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: 
+      _authService.issignin() == null?
+      const AuthPAge()
+      :
+      const HomePage()
+      ,
     );
   }
 }

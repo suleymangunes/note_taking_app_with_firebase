@@ -4,13 +4,13 @@ import 'package:get/get.dart';
 import 'package:not_uygulamasi/pages/editnote.dart';
 
 class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
-  
+
   const EditPageAppBar({
     Key? key,
     required this.widget,
     required this.title,
     required this.note,
-    required this.data, 
+    required this.data,
     required this.db,
   }) : super(key: key);
 
@@ -21,7 +21,7 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
   final CollectionReference<Object?> db;
 
   Future<bool?> showwarning(BuildContext context) async => showDialog<bool>(
-    context: context, 
+    context: context,
     builder: ((context) {
       return AlertDialog(
         title: const Text("Değişiklikleri kaydetmek ister misin?"),
@@ -29,7 +29,7 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
           ElevatedButton(
             onPressed: (() {
               return Navigator.pop(context, true);
-            }), 
+            }),
             child: const Text("Hayır")
           ),
           ElevatedButton(
@@ -48,7 +48,7 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
                 snackPosition: SnackPosition.TOP,
                 animationDuration: const Duration(seconds: 1),
                ));
-            }), 
+            }),
             child: const Text("Evet")
           )
         ],
@@ -76,9 +76,6 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
             actions: [
               IconButton(
                 onPressed: (() {
-                  print(snapshot.data.docs[0].data());
-                  print(snapshot.data.docs[0].data()["archive"]);
-
                   if(snapshot.data.docs[0].data()["archive"] == false){
                     widget.data.reference.update({
                     "baslik": title.text,
@@ -95,7 +92,7 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
                     backgroundColor: Colors.white,
                     snackPosition: SnackPosition.TOP,
                     animationDuration: const Duration(seconds: 1),
-                    duration: Duration(seconds: 1)
+                    duration: const Duration(seconds: 1)
                    ));
                   }
                   else if(snapshot.data.docs[0].data()["archive"] == true){
@@ -114,21 +111,23 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
                     backgroundColor: Colors.white,
                     snackPosition: SnackPosition.TOP,
                     animationDuration: const Duration(seconds: 1),
-                    duration: Duration(seconds: 1)
+                    duration: const Duration(seconds: 1)
 
                    ));
                   }
-                }), 
+                }),
 
-                icon: 
+                icon:
                 snapshot.hasData ?
-                snapshot.data.docs[0].data()["archive"] == true 
+                snapshot.data.docs.isNotEmpty ?
+                snapshot.data.docs[0].data()["archive"] == true
                 ?
                 Icon(Icons.archive_rounded, size: Get.width * 0.07)
                 :
                 Icon(Icons.archive_outlined, size: Get.width * 0.07)
                 :
-                const Icon(Icons.archive_sharp)
+                const Icon(Icons.archive_sharp):
+                Icon(Icons.archive_sharp)
               )
               ,
               IconButton(
@@ -162,14 +161,14 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
                     animationDuration: const Duration(seconds: 1),
                    ));
                   }
-                }), 
+                }),
                 icon: Icon(Icons.update_rounded, size: Get.width * 0.07)
               ),
               IconButton(
                 onPressed: (() {
                    widget.data.reference.delete().whenComplete(() => Navigator.pop(context))
                    .whenComplete(() => Get.snackbar(
-                    "", 
+                    "",
                     "",
                     titleText: const Text("Silindi"),
                     messageText: const Text("Başarılı"),
@@ -179,33 +178,9 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
                     animationDuration: const Duration(seconds: 1),
                     )
                   );
-                }), 
+                }),
                 icon: Icon(Icons.delete_forever_rounded, size: Get.width * 0.07,)
               ),
-              
-          
-              // ElevatedButton(
-              //   style: ButtonStyle(
-              //     elevation: MaterialStateProperty.all(0),
-              //   ),
-              //   onPressed: (() {
-              //     widget.data.reference.update({
-              //       "baslik": title.text,
-              //       "icerik": note.text
-              //     }).whenComplete(() => Navigator.pop(context)).
-              //     whenComplete(() =>  Get.snackbar(
-              //       "",
-              //       "",
-              //       titleText: const Text("Güncellendi"),
-              //       messageText: const Text("Başarılı"),
-              //       icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
-              //       backgroundColor: Colors.white,
-              //       snackPosition: SnackPosition.TOP,
-              //       animationDuration: const Duration(seconds: 1),
-              //      ));
-              //   }), 
-              //   child: const Text("guncelle")
-              // )
             ],
           );
         }

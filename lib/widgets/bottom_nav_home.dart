@@ -22,7 +22,7 @@ class _BottomNavDesignState extends State<BottomNavDesign> {
         Icons.archive_rounded,
       ],
       iconSize: Get.width * 0.08,
-      backgroundColor: Color.fromARGB(255, 220, 225, 252),
+      backgroundColor: const Color.fromARGB(255, 220, 225, 252),
       inactiveColor: Colors.grey,
       activeIndex: controllerSelect.bottomNavIndex.value,
       activeColor: Colors.black87,

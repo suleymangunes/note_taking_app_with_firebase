@@ -68,29 +68,6 @@ class AddPageAppBar extends StatelessWidget with PreferredSizeWidget {
             )
         ),
           ),
-          // ElevatedButton(
-          //   style: ButtonStyle(
-          //     elevation: MaterialStateProperty.all(0),
-          //   ),
-          //   onPressed: (() {
-          //     db.add({
-          //       "baslik": title.text,
-          //       "icerik": note.text
-          //     // ignore: void_checks
-          //     }).whenComplete(() => Navigator.pop(context)).
-          //     whenComplete(() => Get.snackbar(
-          //       "",
-          //       "",
-          //       titleText: const Text("Kaydedildi"),
-          //       messageText: const Text("Başarılı"),
-          //       icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
-          //       backgroundColor: Colors.white,
-          //       snackPosition: SnackPosition.TOP,
-          //       animationDuration: const Duration(seconds: 1),
-          //      ));
-          //   }), 
-          //   child: const Text("kaydet")
-          // )
         ],
       ),
     );
