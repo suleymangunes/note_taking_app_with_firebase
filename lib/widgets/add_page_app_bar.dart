@@ -42,24 +42,46 @@ class AddPageAppBar extends StatelessWidget with PreferredSizeWidget {
               else{
                 db.orderBy("id").get().then((value) {
                 // db.get().then((value) {
-                  db.add({
-                  "id": value.docs.last["id"] + 1,
-                  "baslik": title.text,
-                  "icerik": note.text,
-                  "tarih": Timestamp.now(),
-                  "archive": false
-                // ignore: void_checks
-                }).whenComplete(() => Navigator.pop(context)).
-                whenComplete(() => Get.snackbar(
-                  "",
-                  "",
-                  titleText: const Text("Yeni Not Eklendi"),
-                  messageText: const Text("Başarılı"),
-                  icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
-                  backgroundColor: Colors.white,
-                  snackPosition: SnackPosition.TOP,
-                  animationDuration: const Duration(seconds: 1),
-                  ));
+                  if (value.docs.isNotEmpty){
+                    db.add({
+                      "id": value.docs.last["id"] + 1,
+                      "baslik": title.text,
+                      "icerik": note.text,
+                      "tarih": Timestamp.now(),
+                      "archive": false
+                    // ignore: void_checks
+                    }).whenComplete(() => Navigator.pop(context)).
+                    whenComplete(() => Get.snackbar(
+                      "",
+                      "",
+                      titleText: const Text("Yeni Not Eklendi"),
+                      messageText: const Text("Başarılı"),
+                      icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
+                      backgroundColor: Colors.white,
+                      snackPosition: SnackPosition.TOP,
+                      animationDuration: const Duration(seconds: 1),
+                    ));
+                  }else{
+                    db.add({
+                      "id": 1,
+                      "baslik": title.text,
+                      "icerik": note.text,
+                      "tarih": Timestamp.now(),
+                      "archive": false
+                    // ignore: void_checks
+                    }).whenComplete(() => Navigator.pop(context)).
+                    whenComplete(() => Get.snackbar(
+                      "",
+                      "",
+                      titleText: const Text("Yeni Not Eklendi"),
+                      messageText: const Text("Başarılı"),
+                      icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
+                      backgroundColor: Colors.white,
+                      snackPosition: SnackPosition.TOP,
+                      animationDuration: const Duration(seconds: 1),
+                    ));
+                  }
+                  
                 });
               }
             }), 
