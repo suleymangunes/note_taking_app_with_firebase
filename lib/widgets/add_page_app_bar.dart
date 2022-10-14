@@ -41,6 +41,7 @@ class AddPageAppBar extends StatelessWidget with PreferredSizeWidget {
               }
               else{
                 db.orderBy("id").get().then((value) {
+                // db.get().then((value) {
                   db.add({
                   "id": value.docs.last["id"] + 1,
                   "baslik": title.text,

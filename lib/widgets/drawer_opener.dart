@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:not_uygulamasi/main.dart';
 import 'package:not_uygulamasi/pages/auth_page.dart';
 import 'package:not_uygulamasi/service/auth.dart';
 
@@ -10,7 +11,7 @@ class DrawerOpener extends StatelessWidget {
 
   final AuthService _authService = AuthService();
   final CollectionReference<Object?> db;
-  final CollectionReference db2 = FirebaseFirestore.instance.collection("Person");
+  final CollectionReference db2 = FirebaseFirestore.instance.collection("Person").doc(AuthService().infouser()).collection("notes");
 
 
   @override
@@ -49,7 +50,7 @@ class DrawerOpener extends StatelessWidget {
             ListTile(
               onTap: () {
                 print(
-                  db2.doc(_authService.infouser()).collection("notes").get().then((value) => print(value.docs[0].data()))
+                  db2.get().then((value) => print(value.docs[0].data()))
                 );
                 // db2.doc(_authService.infouser()).collection("notes").add({
                 //   "ekle": "merhaba"

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:not_uygulamasi/service/auth.dart';
 import 'package:not_uygulamasi/widgets/edit_form.dart';
 import 'package:not_uygulamasi/widgets/edit_note_app_bar.dart';
 
@@ -14,7 +15,7 @@ class EditNote extends StatefulWidget {
 class _EditNoteState extends State<EditNote> {
   
   final _formKey = GlobalKey<FormState>();
-  CollectionReference db = FirebaseFirestore.instance.collection("notes");
+  CollectionReference db = FirebaseFirestore.instance.collection("Person").doc(AuthService().infouser()).collection("notes");
 
   TextEditingController title = TextEditingController();
   TextEditingController note = TextEditingController();

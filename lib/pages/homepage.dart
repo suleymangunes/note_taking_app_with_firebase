@@ -6,6 +6,7 @@ import 'package:not_uygulamasi/controllers/controller_select.dart';
 import 'package:not_uygulamasi/pages/addnote.dart';
 import 'package:not_uygulamasi/pages/archivenotepage.dart';
 import 'package:not_uygulamasi/pages/normalnotepage.dart';
+import 'package:not_uygulamasi/service/auth.dart';
 import 'package:not_uygulamasi/widgets/bottom_nav_home.dart';
 import 'package:not_uygulamasi/widgets/drawer_opener.dart';
 import 'package:not_uygulamasi/widgets/home_app_bar.dart';
@@ -20,7 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   ControllerSelect controllerSelect = Get.put(ControllerSelect());
-  CollectionReference db = FirebaseFirestore.instance.collection("notes");
+  CollectionReference db = FirebaseFirestore.instance.collection("Person").doc(AuthService().infouser()).collection("notes");
   final _advancedDrawerController = AdvancedDrawerController();
 
   void handleMenuButtonPressed() {

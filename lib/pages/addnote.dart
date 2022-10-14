@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:not_uygulamasi/service/auth.dart';
 import 'package:not_uygulamasi/widgets/add_form.dart';
 import 'package:not_uygulamasi/widgets/add_page_app_bar.dart';
 
@@ -14,7 +15,7 @@ class AddNote extends StatefulWidget {
 class _AddNoteState extends State<AddNote> {
 
   final _formKey = GlobalKey<FormState>();
-  CollectionReference db = FirebaseFirestore.instance.collection("notes");
+  CollectionReference db = FirebaseFirestore.instance.collection("Person").doc(AuthService().infouser()).collection("notes");
 
   TextEditingController title = TextEditingController();
   TextEditingController note = TextEditingController();
