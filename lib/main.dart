@@ -42,12 +42,54 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
-      home: 
+      home:
       _authService.issignin() == null?
-      const AuthPAge()
+      PageViewDesign()
       :
       const HomePage()
       ,
+    );
+  }
+}
+
+
+class PageViewDesign extends StatelessWidget {
+  PageViewDesign({super.key});
+
+  final AuthService _authService = AuthService();
+
+  @override
+  Widget build(BuildContext context) {
+    final PageController controller = PageController();
+    return PageView(
+      /// [PageView.scrollDirection] defaults to [Axis.horizontal].
+      /// Use [Axis.vertical] to scroll vertically.
+      physics: BouncingScrollPhysics(),
+      controller: controller,
+      children: <Widget>[
+        const Center(
+          child: Text('First Page'),
+        ),
+        const Center(
+          child: Text('Second Page'),
+        ),
+        Column(
+          children: [
+            Center(
+              child: Text('Third Page'),
+            ),
+            ElevatedButton(
+              onPressed: (() {
+                _authService.issignin() == null?
+                Get.to(AuthPAge())
+                :
+                Get.to(HomePage());
+              }), 
+              child: Text("basla")
+            )
+          ],
+        ),
+      ],
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_uygulamasi/pages/homepage.dart';
@@ -17,6 +18,7 @@ class _AuthPAgeState extends State<AuthPAge> {
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
   final AuthService _authService = AuthService();
+  bool ticksign = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class _AuthPAgeState extends State<AuthPAge> {
       body: SingleChildScrollView(
         child: Center(
           child: Form(
+            autovalidateMode: AutovalidateMode.always,
             key: _formKey,
             child: Column(
               children: [
@@ -47,13 +50,16 @@ class _AuthPAgeState extends State<AuthPAge> {
                       if (value == null || value.isEmpty) {
                         return 'Email alanı boş olamaz.';
                       }
-                      return null;
+                      return EmailValidator.validate(value) ? null : "Please enter a valid email";
                     },
                   ),
                 ),
                 SizedBox(
                   width: Get.width * 0.8,
                   child: TextFormField(
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
                     controller: controllerPassword,
                     decoration: const InputDecoration(
                       hintText: "Şifre"
@@ -61,6 +67,9 @@ class _AuthPAgeState extends State<AuthPAge> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Şifre alanı boş olamaz.';
+                      }
+                      else if(controllerPassword.text.length < 8){
+                        return 'Şifre 8 karakterden fazla olmalıdır.';
                       }
                       return null;
                     },
@@ -72,16 +81,52 @@ class _AuthPAgeState extends State<AuthPAge> {
                 ElevatedButton(
                   onPressed: (() {
                     if (_formKey.currentState!.validate()) {
-                      _authService.signIn(controllerEmail.text, controllerPassword.text).whenComplete(() {
-                       Get.offAll(const HomePage());
-                      } 
-                      );
+                      setState(() {
+                        ticksign = true;
+                      });
+                      _authService.signIn(controllerEmail.text, controllerPassword.text)
+                      .onError((error, stackTrace) {
+                        Get.offAll(AuthPAge());
+                        Get.defaultDialog(
+                          title: "Kullanıcı Adı Ya Da Şifre Hatalı",
+                          middleText: "Lütfen Tekrar Deneyin",
+                        );
+                        Get.snackbar(
+                          "", 
+                          "",
+                          titleText: const Text("Kullanıcı Adı Ya Da Şifre Hatalı"),
+                          messageText: const Text("Lütfen Tekrar Deneyin"),
+                          icon: Icon(Icons.close_rounded, color: Colors.red, size: Get.width * 0.07,),
+                          backgroundColor: Colors.white,
+                          snackPosition: SnackPosition.TOP,
+                          animationDuration: const Duration(seconds: 1),
+                          duration: Duration(seconds: 5),
+                          );
+                          })
+                      .then((value) {
+                        if(value != null){
+                          if(value.email!.isNotEmpty){
+                            Get.snackbar(
+                              "", 
+                              "",
+                              titleText: const Text("Giriş Yapıldı"),
+                              messageText: const Text("Başarılı"),
+                              icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
+                              backgroundColor: Colors.white,
+                              snackPosition: SnackPosition.TOP,
+                              animationDuration: const Duration(seconds: 1),
+                            );
+                            Get.offAll(const HomePage());
+                          }
+                        }
+                      })
+                        ;
                     }
                   }),
-                  child: const Text("Giriş Yap"),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey)
                   ),
+                  child: ticksign? const CircularProgressIndicator() :const Text("Giriş Yap"),
                 ),
                 ElevatedButton(
                   onPressed: (() {
@@ -98,6 +143,20 @@ class _AuthPAgeState extends State<AuthPAge> {
                     ),
                   ),
                 ),
+                ElevatedButton(
+                  onPressed: (() {
+                    Get.defaultDialog(
+                      title: "GİRİŞ YAPILAMADI",
+                      middleText: "Kullanıcı adı ya da şifre hatalı.\nLütfen Tekrar Deneyin",
+                      radius: 10,
+                      backgroundColor: Color.fromARGB(255, 237, 240, 255),
+                      contentPadding: EdgeInsets.all(20),
+                      titlePadding: EdgeInsets.only(top: 20),
+                      confirm: Text("tamam")
+                    );
+                  }), 
+                  child: Text("tikla")
+                )
               ],
             ),
           ),

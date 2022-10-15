@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_uygulamasi/pages/auth_page.dart';
@@ -27,6 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SingleChildScrollView(
         child: Center(
           child: Form(
+            autovalidateMode: AutovalidateMode.always,
             key: _formKey,
             child: Column(
               children: [
@@ -65,13 +67,16 @@ class _RegisterPageState extends State<RegisterPage> {
                       if (value == null || value.isEmpty) {
                         return 'Email alanı boş olamaz.';
                       }
-                      return null;
+                      return EmailValidator.validate(value) ? null : "Please enter a valid email";
                     },
                   ),
                 ),
                 SizedBox(
                   width: Get.width * 0.8,
                   child: TextFormField(
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
                     controller: controllerPassword,
                     decoration: const InputDecoration(
                       hintText: "Şifre"
@@ -79,9 +84,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Şifre alanı boş olamaz.';
-                      }
-                      if(controllerPassword.text != controllerPasswordAgain.text){
-                        return 'Şifreler aynı olmalıdır.';
                       }
                       else if(controllerPassword.text.length < 8){
                         return 'Şifre 8 karakterden fazla olmalıdır.';
@@ -93,6 +95,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(
                   width: Get.width * 0.8,
                   child: TextFormField(
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
                     controller: controllerPasswordAgain,
                     decoration: const InputDecoration(
                       hintText: "Şifre Tekrar"

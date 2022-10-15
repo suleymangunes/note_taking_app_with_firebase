@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:not_uygulamasi/main.dart';
 import 'package:not_uygulamasi/pages/auth_page.dart';
 import 'package:not_uygulamasi/service/auth.dart';
 
@@ -101,7 +102,7 @@ class _DrawerOpenerState extends State<DrawerOpener> {
                     onTap: (() {
                       _authService.signOut().whenComplete((){
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) {
-                          return AuthPAge();
+                          return PageViewDesign();
                         })));
                         print("cikis yapti");
                       });

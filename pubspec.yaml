@@ -38,9 +38,9 @@ dependencies:
   cloud_firestore: ^3.5.1
   get: ^4.6.5
   animated_bottom_navigation_bar: ^1.1.0
-  flutter_zoom_drawer: ^3.0.3
   flutter_advanced_drawer: ^1.3.2
   firebase_auth: ^3.11.2
+  email_validator: ^2.1.17
 
 dev_dependencies:
   flutter_test:
