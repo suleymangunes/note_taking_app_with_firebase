@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_uygulamasi/options/firebase_options.dart';
-import 'package:not_uygulamasi/pages/auth_page.dart';
+import 'package:not_uygulamasi/pages/pageviewpage.dart';
 import 'package:not_uygulamasi/service/auth.dart';
 import 'pages/homepage.dart';
 
@@ -48,48 +48,6 @@ class MyApp extends StatelessWidget {
       :
       const HomePage()
       ,
-    );
-  }
-}
-
-
-class PageViewDesign extends StatelessWidget {
-  PageViewDesign({super.key});
-
-  final AuthService _authService = AuthService();
-
-  @override
-  Widget build(BuildContext context) {
-    final PageController controller = PageController();
-    return PageView(
-      /// [PageView.scrollDirection] defaults to [Axis.horizontal].
-      /// Use [Axis.vertical] to scroll vertically.
-      physics: BouncingScrollPhysics(),
-      controller: controller,
-      children: <Widget>[
-        const Center(
-          child: Text('First Page'),
-        ),
-        const Center(
-          child: Text('Second Page'),
-        ),
-        Column(
-          children: [
-            Center(
-              child: Text('Third Page'),
-            ),
-            ElevatedButton(
-              onPressed: (() {
-                _authService.issignin() == null?
-                Get.to(AuthPAge())
-                :
-                Get.to(HomePage());
-              }), 
-              child: Text("basla")
-            )
-          ],
-        ),
-      ],
     );
   }
 }

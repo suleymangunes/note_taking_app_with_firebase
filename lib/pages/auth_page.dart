@@ -86,22 +86,33 @@ class _AuthPAgeState extends State<AuthPAge> {
                       });
                       _authService.signIn(controllerEmail.text, controllerPassword.text)
                       .onError((error, stackTrace) {
-                        Get.offAll(AuthPAge());
+                        Get.offAll(const AuthPAge());
                         Get.defaultDialog(
-                          title: "Kullanıcı Adı Ya Da Şifre Hatalı",
-                          middleText: "Lütfen Tekrar Deneyin",
+                          title: "GİRİŞ YAPILAMADI",
+                          content: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                            style: TextStyle(color: Colors.black,fontSize: Get.width * 0.04),
+                            children: const [
+                              TextSpan(text: "Kullanıcı adı ", style: TextStyle(fontWeight: FontWeight.w500,)),
+                              TextSpan(text: "ya da "),
+                              TextSpan(text: "Şifre ", style: TextStyle(fontWeight: FontWeight.w500)),
+                              TextSpan(text: "hatalı.\nLütfen tekrar deneyiniz.")
+                            ]
+                          )),
+                          radius: 10,
+                          backgroundColor: const Color.fromARGB(255, 167, 187, 196),
+                          contentPadding: const EdgeInsets.all(20),
+                          titlePadding: const EdgeInsets.only(top: 20),
+                          confirm: ElevatedButton(
+                            onPressed: (){
+                              Get.back();
+                            },
+                            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blueGrey)),
+                            child: const Text("Tekrar Dene")
+                            ),
                         );
-                        Get.snackbar(
-                          "", 
-                          "",
-                          titleText: const Text("Kullanıcı Adı Ya Da Şifre Hatalı"),
-                          messageText: const Text("Lütfen Tekrar Deneyin"),
-                          icon: Icon(Icons.close_rounded, color: Colors.red, size: Get.width * 0.07,),
-                          backgroundColor: Colors.white,
-                          snackPosition: SnackPosition.TOP,
-                          animationDuration: const Duration(seconds: 1),
-                          duration: Duration(seconds: 5),
-                          );
+                        return null;
                           })
                       .then((value) {
                         if(value != null){
@@ -110,7 +121,6 @@ class _AuthPAgeState extends State<AuthPAge> {
                               "", 
                               "",
                               titleText: const Text("Giriş Yapıldı"),
-                              messageText: const Text("Başarılı"),
                               icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
                               backgroundColor: Colors.white,
                               snackPosition: SnackPosition.TOP,
@@ -119,14 +129,13 @@ class _AuthPAgeState extends State<AuthPAge> {
                             Get.offAll(const HomePage());
                           }
                         }
-                      })
-                        ;
+                      });
                     }
                   }),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey)
                   ),
-                  child: ticksign? const CircularProgressIndicator() :const Text("Giriş Yap"),
+                  child: ticksign? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2) :const Text("Giriş Yap"),
                 ),
                 ElevatedButton(
                   onPressed: (() {
@@ -143,20 +152,6 @@ class _AuthPAgeState extends State<AuthPAge> {
                     ),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: (() {
-                    Get.defaultDialog(
-                      title: "GİRİŞ YAPILAMADI",
-                      middleText: "Kullanıcı adı ya da şifre hatalı.\nLütfen Tekrar Deneyin",
-                      radius: 10,
-                      backgroundColor: Color.fromARGB(255, 237, 240, 255),
-                      contentPadding: EdgeInsets.all(20),
-                      titlePadding: EdgeInsets.only(top: 20),
-                      confirm: Text("tamam")
-                    );
-                  }), 
-                  child: Text("tikla")
-                )
               ],
             ),
           ),

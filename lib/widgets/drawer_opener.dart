@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_uygulamasi/main.dart';
 import 'package:not_uygulamasi/pages/auth_page.dart';
+import 'package:not_uygulamasi/pages/pageviewpage.dart';
 import 'package:not_uygulamasi/service/auth.dart';
 
 class DrawerOpener extends StatefulWidget {

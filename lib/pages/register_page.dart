@@ -139,8 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         animationDuration: const Duration(seconds: 1),
                       );
                       }
-                      )
-                      ;
+                      );
                     }
                   }),
                   style: ButtonStyle(
