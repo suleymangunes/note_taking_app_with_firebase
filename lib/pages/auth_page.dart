@@ -21,77 +21,85 @@ class _AuthPAgeState extends State<AuthPAge> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: Get.width * 0.8,
-                child: TextFormField(
-                  controller: controllerEmail,
-                  decoration: const InputDecoration(
-                    hintText: "email"
+      body: SingleChildScrollView(
+        child: Center(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: Get.height * 0.1,
+                ),
+                SizedBox(
+                  width: Get.width * 0.5,
+                  child: Image.asset("images/apple1.png")),
+                SizedBox(
+                  height: Get.height * 0.08,
+                ),
+                SizedBox(
+                  width: Get.width * 0.8,
+                  child: TextFormField(
+                    controller: controllerEmail,
+                    decoration: const InputDecoration(
+                      hintText: "Email"
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Email alanı boş olamaz.';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
                 ),
-              ),
-              SizedBox(
-                width: Get.width * 0.8,
-                child: TextFormField(
-                  controller: controllerPassword,
-                  decoration: const InputDecoration(
-                    hintText: "Password"
+                SizedBox(
+                  width: Get.width * 0.8,
+                  child: TextFormField(
+                    controller: controllerPassword,
+                    decoration: const InputDecoration(
+                      hintText: "Şifre"
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Şifre alanı boş olamaz.';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
+                ),
+                SizedBox(
+                  height: Get.height * 0.02,
+                ),
+                ElevatedButton(
+                  onPressed: (() {
+                    if (_formKey.currentState!.validate()) {
+                      _authService.signIn(controllerEmail.text, controllerPassword.text).whenComplete(() {
+                       Get.offAll(const HomePage());
+                      } 
+                      );
                     }
-                    return null;
-                  },
+                  }),
+                  child: const Text("Giriş Yap"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey)
+                  ),
                 ),
-              ),
-              ElevatedButton(
-                
-                onPressed: (() {
-                  if (_formKey.currentState!.validate()) {
-                    _authService.signIn(controllerEmail.text, controllerPassword.text).whenComplete(() {
-
-                     Get.offAll(const HomePage());
-                    } 
-                    );
-                  }
-                }),
-                child: const Text("merhaba"
-                )
-              ),
-              ElevatedButton(
-                onPressed: (() {
-                  Get.to(const RegisterPage());
-                }),
-                child: const Text(
-                  "kaydol"
+                ElevatedButton(
+                  onPressed: (() {
+                    Get.to(const RegisterPage());
+                  }),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                    elevation: MaterialStateProperty.all(0),
+                  ),
+                  child: const Text(
+                    "Kaydol",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 55, 68, 74)
+                    ),
+                  ),
                 ),
-              ),
-              ElevatedButton(
-                onPressed: (() {
-                  _authService.issignin();
-                }), 
-                child: const Text("giris yapmis mi")
-              ),
-              ElevatedButton(
-                onPressed: (() {
-                  _authService.signOut();
-                }), 
-                child: const Text("cikis yap")
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ),

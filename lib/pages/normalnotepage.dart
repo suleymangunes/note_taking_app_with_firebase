@@ -23,6 +23,42 @@ class _NoteNormalPageState extends State<NoteNormalPage> {
     return StreamBuilder<Object>(
       stream: widget.db.where("archive", isEqualTo: false).orderBy("tarih", descending: true).snapshots(),
       builder: (context, AsyncSnapshot snapshot) {
+        if(snapshot.hasData){
+          if(snapshot.data.docs.length == 0){
+          return Center(
+            child: Card(
+              color: const Color.fromARGB(255, 237, 240, 255),
+              elevation: 15,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                  text: "Henüz hiç notun yok.\nHemen oluşturmak için ",
+                  style: TextStyle(
+                    color: Colors.black, 
+                    fontSize: Get.width * 0.04,
+                    ),
+                  children: [
+                    WidgetSpan(
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 114, 149, 166), 
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                        child: Text(
+                          " + ",
+                          style: TextStyle(fontSize: Get.width * 0.05,),
+                        ),
+                        ),
+                      ),
+                    const TextSpan(text: " butonuna bas.")
+                  ]
+                ))
+              )
+            ),
+          );
+        }
+        }
         if(snapshot.hasError){
           Column(
             children: [
@@ -36,29 +72,34 @@ class _NoteNormalPageState extends State<NoteNormalPage> {
         if (snapshot.connectionState == ConnectionState.waiting){
           const CircularProgressIndicator();
         }
-        return 
-        GridView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemCount: snapshot.hasData 
-          ?
-          snapshot.data.docs.length
-          :
-          0
-          ,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
-          itemBuilder: ((context, index) {
-            return 
-            GestureDetector(
-              onTap: (() {
-                Get.to(EditNote(data: snapshot.data.docs[index]));
-              }),
-              child: CardDesign(
-                snapshot.data.docs[index].data()["baslik"].toString(),
-                snapshot.data.docs[index].data()["icerik"].toString()
-              )
+        if(snapshot.hasData){
+          return 
+            GridView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: snapshot.hasData 
+              ?
+              snapshot.data.docs.length
+              :
+              0
+              ,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
+              itemBuilder: ((context, index) {
+                return 
+                GestureDetector(
+                  onTap: (() {
+                    Get.to(EditNote(data: snapshot.data.docs[index]));
+                  }),
+                  child: CardDesign(
+                    snapshot.data.docs[index].data()["baslik"].toString(),
+                    snapshot.data.docs[index].data()["icerik"].toString()
+                  )
+                );
+              })
             );
-          })
-        );
+        }
+        else{
+          return const Text("");
+        }
       }
     );
   }

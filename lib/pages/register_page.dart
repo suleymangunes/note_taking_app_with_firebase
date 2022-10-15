@@ -24,116 +24,129 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: Get.width * 0.8,
-                child: TextFormField(
-                  controller: controllerName,
-                  decoration: const InputDecoration(
-                    hintText: "Name"
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
+      body: SingleChildScrollView(
+        child: Center(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: Get.height * 0.1,
                 ),
-              ),
-              SizedBox(
-                width: Get.width * 0.8,
-                child: TextFormField(
-                  controller: controllerEmail,
-                  decoration: const InputDecoration(
-                    hintText: "email"
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
+                SizedBox(
+                  width: Get.width * 0.5,
+                  child: Image.asset("images/apple1.png")),
+                SizedBox(
+                  height: Get.height * 0.08,
                 ),
-              ),
-              SizedBox(
-                width: Get.width * 0.8,
-                child: TextFormField(
-                  controller: controllerPassword,
-                  decoration: const InputDecoration(
-                    hintText: "Password"
+                SizedBox(
+                  width: Get.width * 0.8,
+                  child: TextFormField(
+                    controller: controllerName,
+                    decoration: const InputDecoration(
+                      hintText: "İsim ve Soyisim"
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'İsim alanı boş olamaz.';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    if(controllerPassword.text != controllerPasswordAgain.text){
-                      return 'password not different';
-                    }
-                    else if(controllerPassword.text.length < 8){
-                      return 'password shoul be greater than 8 character';
-                    }
-                    return null;
-                  },
                 ),
-              ),
-              SizedBox(
-                width: Get.width * 0.8,
-                child: TextFormField(
-                  controller: controllerPasswordAgain,
-                  decoration: const InputDecoration(
-                    hintText: "Password Again"
+                SizedBox(
+                  width: Get.width * 0.8,
+                  child: TextFormField(
+                    controller: controllerEmail,
+                    decoration: const InputDecoration(
+                      hintText: "Email"
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Email alanı boş olamaz.';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    if(controllerPassword.text != controllerPasswordAgain.text){
-                      return 'password not different';
-                    }
-                    else if(controllerPasswordAgain.text.length < 8){
-                      return 'password shoul be greater than 8 character';
-                    }
-                    return null;
-                  },
                 ),
-              ),
-              ElevatedButton(
-                onPressed: (() {
-                  if (_formKey.currentState!.validate()) {
-                    setState(() {
-                      _isLoading = true;
-                    });
-                    print("calisti");
-                    _authService.createPerson(controllerName.text, controllerEmail.text, controllerPassword.text)
-                    .whenComplete(() {
-
-                    Get.off(const AuthPAge());
-                    Get.snackbar(
-                      "", 
-                      "",
-                      titleText: const Text("Kaydolma işlemi tamamladı"),
-                      messageText: const Text("Lütfen Giriş Yapın"),
-                      icon: const Icon(Icons.done, color: Colors.green),
-                      backgroundColor: Colors.white,
-                      snackPosition: SnackPosition.TOP,
-                      animationDuration: const Duration(seconds: 1),
-                    );
+                SizedBox(
+                  width: Get.width * 0.8,
+                  child: TextFormField(
+                    controller: controllerPassword,
+                    decoration: const InputDecoration(
+                      hintText: "Şifre"
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Şifre alanı boş olamaz.';
+                      }
+                      if(controllerPassword.text != controllerPasswordAgain.text){
+                        return 'Şifreler aynı olmalıdır.';
+                      }
+                      else if(controllerPassword.text.length < 8){
+                        return 'Şifre 8 karakterden fazla olmalıdır.';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: Get.width * 0.8,
+                  child: TextFormField(
+                    controller: controllerPasswordAgain,
+                    decoration: const InputDecoration(
+                      hintText: "Şifre Tekrar"
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Şifre alanı boş olamaz.';
+                      }
+                      if(controllerPassword.text != controllerPasswordAgain.text){
+                        return 'Şifreler aynı olmalıdır.';
+                      }
+                      else if(controllerPasswordAgain.text.length < 8){
+                        return 'Şifre 8 karakterden fazla olmalıdır.';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: Get.height * 0.02,
+                ),
+                ElevatedButton(
+                  onPressed: (() {
+                    if (_formKey.currentState!.validate()) {
+                      setState(() {
+                        _isLoading = true;
+                      });
+                      _authService.createPerson(controllerName.text, controllerEmail.text, controllerPassword.text)
+                      .whenComplete(() {
+                      Get.off(const AuthPAge());
+                      Get.snackbar(
+                        "", 
+                        "",
+                        titleText: const Text("Kaydolma işlemi tamamladı"),
+                        messageText: const Text("Lütfen Giriş Yapın"),
+                        icon: const Icon(Icons.done, color: Colors.green),
+                        backgroundColor: Colors.white,
+                        snackPosition: SnackPosition.TOP,
+                        animationDuration: const Duration(seconds: 1),
+                      );
+                      }
+                      )
+                      ;
                     }
-                    )
-                    ;
-                  }
-                }),
-                style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(16.0)),
-                child: _isLoading
-                    ? const CircularProgressIndicator(color: Colors.white,)
-                    : const Text("Kaydol"),
-              ),
-            ],
+                  }),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey)
+                  ),
+                  child: _isLoading
+                      ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2,)
+                      : const Text("Kaydol"),
+                ),
+              ],
+            ),
           ),
         ),
       ),

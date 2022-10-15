@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_uygulamasi/options/firebase_options.dart';
 import 'package:not_uygulamasi/pages/auth_page.dart';
-import 'package:not_uygulamasi/pages/register_page.dart';
 import 'package:not_uygulamasi/service/auth.dart';
 import 'pages/homepage.dart';
 

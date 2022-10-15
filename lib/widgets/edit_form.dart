@@ -30,7 +30,6 @@ class EditForm extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: (() {
-
               return Navigator.pop(context, true);
             }), 
             child: const Text("Evet")

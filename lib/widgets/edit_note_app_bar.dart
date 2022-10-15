@@ -116,7 +116,6 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
                    ));
                   }
                 }),
-
                 icon:
                 snapshot.hasData ?
                 snapshot.data.docs.isNotEmpty ?
@@ -127,7 +126,7 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
                 Icon(Icons.archive_outlined, size: Get.width * 0.07)
                 :
                 const Icon(Icons.archive_sharp):
-                Icon(Icons.archive_sharp)
+                const Icon(Icons.archive_sharp)
               )
               ,
               IconButton(

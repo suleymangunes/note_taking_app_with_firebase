@@ -41,7 +41,6 @@ class AddPageAppBar extends StatelessWidget with PreferredSizeWidget {
               }
               else{
                 db.orderBy("id").get().then((value) {
-                // db.get().then((value) {
                   if (value.docs.isNotEmpty){
                     db.add({
                       "id": value.docs.last["id"] + 1,
@@ -49,7 +48,6 @@ class AddPageAppBar extends StatelessWidget with PreferredSizeWidget {
                       "icerik": note.text,
                       "tarih": Timestamp.now(),
                       "archive": false
-                    // ignore: void_checks
                     }).whenComplete(() => Navigator.pop(context)).
                     whenComplete(() => Get.snackbar(
                       "",
@@ -68,7 +66,6 @@ class AddPageAppBar extends StatelessWidget with PreferredSizeWidget {
                       "icerik": note.text,
                       "tarih": Timestamp.now(),
                       "archive": false
-                    // ignore: void_checks
                     }).whenComplete(() => Navigator.pop(context)).
                     whenComplete(() => Get.snackbar(
                       "",

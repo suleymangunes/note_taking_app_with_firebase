@@ -18,6 +18,37 @@ class _ArchiveNormalPageState extends State<ArchiveNormalPage> {
     return StreamBuilder<Object>(
       stream: widget.db.where("archive", isEqualTo: true).orderBy("tarih", descending: true).snapshots(),
       builder: (context, AsyncSnapshot snapshot) {
+        if(snapshot.hasData){
+          if(snapshot.data.docs.length == 0){
+          return Center(
+            child: Card(
+              color: const Color.fromARGB(255, 237, 240, 255),
+              elevation: 15,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                  text: "Henüz Arşivinde hiç not yok.\nArşivine not eklemek için ",
+                  style: TextStyle(
+                    color: Colors.black, 
+                    fontSize: Get.width * 0.04,
+                    ),
+                  children: [
+                    WidgetSpan(
+                      child: Icon(
+                        Icons.archive_outlined,
+                        size: Get.width * 0.06,
+                      ),
+                      ),
+                    const TextSpan(text: " butonuna bas.")
+                  ]
+                ))
+              )
+            ),
+          );
+        }
+        }
         return GridView.builder(
           physics: const BouncingScrollPhysics(),
           itemCount: snapshot.hasData 
