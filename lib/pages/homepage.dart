@@ -31,7 +31,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return AdvancedDrawer(
+    return Obx((() {
+      return controllerSelect.themeDark.value == false?
+      AdvancedDrawer(
       backdropColor: Colors.blueGrey,
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
@@ -73,6 +75,51 @@ class _HomePageState extends State<HomePage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: const BottomNavDesign()
       ),
+    )
+    :
+    AdvancedDrawer(
+      backdropColor: const Color.fromARGB(255, 28, 28, 28),
+      controller: _advancedDrawerController,
+      animationCurve: Curves.easeInOut,
+      animationDuration: const Duration(milliseconds: 300),
+      animateChildDecoration: true,
+      rtlOpening: false,
+      openScale: 1.0,
+      disabledGestures: false,
+      childDecoration: const BoxDecoration(
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 0.0,
+          ),
+        ],
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
+      drawer: DrawerOpener(db),
+      child: Scaffold(
+        appBar: HomeAppBar(handleMenuButtonPressed),
+        body: Obx((() {
+          return controllerSelect.bottomNavIndex.value == 0 
+          ? 
+          NoteNormalPage(db)
+          : 
+          ArchiveNormalPage(db);
+        })),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 28, 28, 28),
+          onPressed: (() {
+            Get.to(const AddNote());
+          }),
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+            size: Get.width * 0.08,
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: const BottomNavDesign()
+      ),
     );
+    }));
   } 
 }

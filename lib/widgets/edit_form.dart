@@ -16,29 +16,6 @@ class EditForm extends StatelessWidget {
   final TextEditingController note;
   final DocumentSnapshot<Object?> data;
 
-  Future<bool?> showwarning(BuildContext context) async => showDialog<bool>(
-    context: context, 
-    builder: ((context) {
-      return AlertDialog(
-        title: const Text("Değişiklikleri kaydetmek ister misin?"),
-        actions: [
-          ElevatedButton(
-            onPressed: (() {
-              return Navigator.pop(context, false);
-            }), 
-            child: const Text("Hayır")
-          ),
-          ElevatedButton(
-            onPressed: (() {
-              return Navigator.pop(context, true);
-            }), 
-            child: const Text("Evet")
-          )
-        ],
-      );
-    })
-  );
-
   @override
   Widget build(BuildContext context) {
     return Form(

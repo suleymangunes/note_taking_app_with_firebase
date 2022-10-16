@@ -121,6 +121,7 @@ class _AuthPAgeState extends State<AuthPAge> {
                               "", 
                               "",
                               titleText: const Text("Giriş Yapıldı"),
+                              messageText: const Text("Hemen Not Almaya Başla."),
                               icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
                               backgroundColor: Colors.white,
                               snackPosition: SnackPosition.TOP,

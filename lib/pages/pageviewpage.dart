@@ -1,32 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:not_uygulamasi/intro_screens/intropage1.dart';
 import 'package:not_uygulamasi/intro_screens/intropage2.dart';
 import 'package:not_uygulamasi/intro_screens/intropage3.dart';
 import 'package:not_uygulamasi/intro_screens/intropage4.dart';
 import 'package:not_uygulamasi/intro_screens/intropage5.dart';
-import 'package:not_uygulamasi/pages/auth_page.dart';
-import 'package:not_uygulamasi/pages/homepage.dart';
-import 'package:not_uygulamasi/service/auth.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PageViewDesign extends StatefulWidget {
-  PageViewDesign({super.key});
+  const PageViewDesign({super.key});
 
   @override
   State<PageViewDesign> createState() => _PageViewDesignState();
 }
 
 class _PageViewDesignState extends State<PageViewDesign> {
-  final AuthService _authService = AuthService();
 
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
 
   bool lastPage = false;
 
   @override
   Widget build(BuildContext context) {
-    final PageController controller = PageController();
     return Scaffold(
       body: Stack(
         children: [
@@ -49,7 +43,7 @@ class _PageViewDesignState extends State<PageViewDesign> {
           ],
         ),
         Container(
-          alignment: Alignment(0, 0.75),
+          alignment: Alignment(0, 0.85),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
