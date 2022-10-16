@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:not_uygulamasi/controllers/controller_select.dart';
 import 'package:not_uygulamasi/pages/editnote.dart';
 import 'package:not_uygulamasi/widgets/card_design.dart';
+import 'package:not_uygulamasi/widgets/myalertdialog.dart';
 
 class NoteNormalPage extends StatefulWidget {
   const NoteNormalPage(
@@ -18,6 +19,7 @@ class NoteNormalPage extends StatefulWidget {
 class _NoteNormalPageState extends State<NoteNormalPage> {
 
   ControllerSelect controllerSelect = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Object>(
@@ -34,7 +36,7 @@ class _NoteNormalPageState extends State<NoteNormalPage> {
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                  text: "Henüz hiç notun yok.\nHemen oluşturmak için ",
+                  text: "nonote".tr,
                   style: TextStyle(
                     color: Colors.black, 
                     fontSize: Get.width * 0.04,
@@ -51,7 +53,7 @@ class _NoteNormalPageState extends State<NoteNormalPage> {
                         ),
                         ),
                       ),
-                    const TextSpan(text: " butonuna bas.")
+                    TextSpan(text: "clickbut".tr)
                   ]
                 ))
               )
@@ -63,8 +65,8 @@ class _NoteNormalPageState extends State<NoteNormalPage> {
           Column(
             children: [
               Icon(Icons.error, color: Colors.red, size: Get.width * 0.1,),
-              const Text(
-                "Hata oluştu tekrar deneyin"
+              Text(
+                "erragain".tr
               ),
             ],
           );
@@ -89,6 +91,11 @@ class _NoteNormalPageState extends State<NoteNormalPage> {
                   onTap: (() {
                     Get.to(EditNote(data: snapshot.data.docs[index]));
                   }),
+                  onLongPress: () => longAlert(
+                    snapshot.data.docs[index].data()["baslik"].toString(),
+                    snapshot.data.docs[index].data()["icerik"].toString(),
+                    snapshot.data.docs[index]
+                  ),
                   child: CardDesign(
                     snapshot.data.docs[index].data()["baslik"].toString(),
                     snapshot.data.docs[index].data()["icerik"].toString()

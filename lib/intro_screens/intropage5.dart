@@ -15,7 +15,7 @@ class IntroPage5 extends StatelessWidget {
           children: [
             SizedBox(height: Get.width * 0.18),
             Text(
-              "DURMA ! HEMEN GİRİŞ YAP VE İŞLERİNİ KOLAYLAŞTIRMAYA BAŞLA",
+              "s5text".tr,
               style: GoogleFonts.nunito(
                 textStyle: TextStyle(
                   fontSize: Get.width * 0.05,
@@ -43,7 +43,7 @@ class IntroPage5 extends StatelessWidget {
                 backgroundColor: MaterialStateProperty.all(Colors.blueGrey)
               ),
               child: Text(
-                "BAŞLA",
+                "start".tr,
                 style: TextStyle(
                   fontSize: Get.width * 0.04,
                   letterSpacing: 1

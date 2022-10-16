@@ -35,7 +35,7 @@ class _AuthPAgeState extends State<AuthPAge> {
                 ),
                 SizedBox(
                   width: Get.width * 0.5,
-                  child: Image.asset("images/apple1.png")),
+                  child: Image.asset("images/appleb.png")),
                 SizedBox(
                   height: Get.height * 0.08,
                 ),
@@ -48,9 +48,9 @@ class _AuthPAgeState extends State<AuthPAge> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Email alanı boş olamaz.';
+                        return 'emaildont'.tr;
                       }
-                      return EmailValidator.validate(value) ? null : "Please enter a valid email";
+                      return EmailValidator.validate(value) ? null : "emailcant".tr;
                     },
                   ),
                 ),
@@ -61,15 +61,15 @@ class _AuthPAgeState extends State<AuthPAge> {
                     enableSuggestions: false,
                     autocorrect: false,
                     controller: controllerPassword,
-                    decoration: const InputDecoration(
-                      hintText: "Şifre"
+                    decoration: InputDecoration(
+                      hintText: "passw".tr
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Şifre alanı boş olamaz.';
+                        return 'passwdont'.tr;
                       }
                       else if(controllerPassword.text.length < 8){
-                        return 'Şifre 8 karakterden fazla olmalıdır.';
+                        return 'pass8'.tr;
                       }
                       return null;
                     },
@@ -88,16 +88,16 @@ class _AuthPAgeState extends State<AuthPAge> {
                       .onError((error, stackTrace) {
                         Get.offAll(const AuthPAge());
                         Get.defaultDialog(
-                          title: "GİRİŞ YAPILAMADI",
+                          title: "signerr".tr,
                           content: RichText(
                             textAlign: TextAlign.center,
                             text: TextSpan(
                             style: TextStyle(color: Colors.black,fontSize: Get.width * 0.04),
-                            children: const [
-                              TextSpan(text: "Kullanıcı adı ", style: TextStyle(fontWeight: FontWeight.w500,)),
-                              TextSpan(text: "ya da "),
-                              TextSpan(text: "Şifre ", style: TextStyle(fontWeight: FontWeight.w500)),
-                              TextSpan(text: "hatalı.\nLütfen tekrar deneyiniz.")
+                            children: [
+                              TextSpan(text: "usname".tr, style: const TextStyle(fontWeight: FontWeight.w500,)),
+                              TextSpan(text: "or".tr),
+                              TextSpan(text: "paswr".tr, style: const TextStyle(fontWeight: FontWeight.w500)),
+                              TextSpan(text: "tryerr".tr)
                             ]
                           )),
                           radius: 10,
@@ -109,7 +109,7 @@ class _AuthPAgeState extends State<AuthPAge> {
                               Get.back();
                             },
                             style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blueGrey)),
-                            child: const Text("Tekrar Dene")
+                            child: Text("tryag".tr)
                             ),
                         );
                         return null;
@@ -120,8 +120,8 @@ class _AuthPAgeState extends State<AuthPAge> {
                             Get.snackbar(
                               "", 
                               "",
-                              titleText: const Text("Giriş Yapıldı"),
-                              messageText: const Text("Hemen Not Almaya Başla."),
+                              titleText: Text("signsuc".tr),
+                              messageText: Text("startnot".tr),
                               icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
                               backgroundColor: Colors.white,
                               snackPosition: SnackPosition.TOP,
@@ -136,7 +136,7 @@ class _AuthPAgeState extends State<AuthPAge> {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey)
                   ),
-                  child: ticksign? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2) :const Text("Giriş Yap"),
+                  child: ticksign? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2) :Text("sign".tr),
                 ),
                 ElevatedButton(
                   onPressed: (() {
@@ -146,9 +146,9 @@ class _AuthPAgeState extends State<AuthPAge> {
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
                     elevation: MaterialStateProperty.all(0),
                   ),
-                  child: const Text(
-                    "Kaydol",
-                    style: TextStyle(
+                  child: Text(
+                    "reg".tr,
+                    style: const TextStyle(
                       color: Color.fromARGB(255, 55, 68, 74)
                     ),
                   ),

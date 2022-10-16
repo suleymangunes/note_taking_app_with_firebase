@@ -24,8 +24,8 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
     context: context,
     builder: ((context) {
       return AlertDialog(
-        backgroundColor: Color.fromARGB(255, 231, 248, 255),
-        title: const Text("Değişiklikleri kaydetmek ister misin?"),
+        backgroundColor: const Color.fromARGB(255, 231, 248, 255),
+        title: Text("wantchangesave".tr),
         actions: [
           ElevatedButton(
             onPressed: (() {
@@ -34,7 +34,7 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.blueGrey)
             ),
-            child: const Text("Hayır"),
+            child: Text("no".tr),
           ),
           ElevatedButton(
             onPressed: (() {
@@ -45,8 +45,8 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
               whenComplete(() =>  Get.snackbar(
                 "",
                 "",
-                titleText: const Text("Güncellendi"),
-                messageText: const Text("Notlarım Sayfasında Bulabilirsin."),
+                titleText: Text("update".tr),
+                messageText: Text("findnote".tr),
                 icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
                 backgroundColor: Colors.white,
                 snackPosition: SnackPosition.TOP,
@@ -56,7 +56,7 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.blueGrey)
             ),
-            child: const Text("Evet"),
+            child: Text("yes".tr),
           )
         ],
       );
@@ -93,8 +93,8 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
                   whenComplete(() =>  Get.snackbar(
                     "",
                     "",
-                    titleText: const Text("Arşive eklendi"),
-                    messageText: const Text("Arşivlerim Sayfasında Bulabilirsin."),
+                    titleText: Text("addarch".tr),
+                    messageText: Text("findarch".tr),
                     icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
                     backgroundColor: Colors.white,
                     snackPosition: SnackPosition.TOP,
@@ -112,8 +112,8 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
                   whenComplete(() =>  Get.snackbar(
                     "",
                     "",
-                    titleText: const Text("Arşivden Kaldırıldı"),
-                    messageText: const Text("Notlarım Sayfasında Bulabilirsin."),
+                    titleText: Text("removearch".tr),
+                    messageText: Text("findnote".tr),
                     icon: const Icon(Icons.close, color: Colors.red),
                     backgroundColor: Colors.white,
                     snackPosition: SnackPosition.TOP,
@@ -142,8 +142,8 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
                     Get.snackbar(
                   "",
                   "",
-                  titleText: const Text("Not Boş Olamaz."),
-                  messageText: const Text("Güncellemek için bir şeyler yazın."),
+                  titleText: Text("noempty".tr),
+                  messageText: Text("writeupdate".tr),
                   icon: const Icon(Icons.warning_amber_rounded, color: Colors.yellow),
                   backgroundColor: Colors.white,
                   snackPosition: SnackPosition.TOP,
@@ -159,8 +159,8 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
                   whenComplete(() =>  Get.snackbar(
                     "",
                     "",
-                    titleText: const Text("Güncellendi"),
-                    messageText: const Text("Notlarım Sayfasında Bulabilirsin."),
+                    titleText: Text("update".tr),
+                    messageText: Text("findnote".tr),
                     icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
                     backgroundColor: Colors.white,
                     snackPosition: SnackPosition.TOP,
@@ -176,8 +176,8 @@ class EditPageAppBar extends StatelessWidget with PreferredSizeWidget {
                    .whenComplete(() => Get.snackbar(
                     "",
                     "",
-                    titleText: const Text("Silindi"),
-                    messageText: const Text("Silinen Nota Bir Daha Ulaşılmaz."),
+                    titleText: Text("del".tr),
+                    messageText: Text("nowaydel".tr),
                     icon: const Icon(Icons.highlight_remove_rounded, color: Colors.red),
                     backgroundColor: Colors.white,
                     snackPosition: SnackPosition.TOP,

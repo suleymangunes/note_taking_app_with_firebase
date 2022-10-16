@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_uygulamasi/pages/editnote.dart';
 import 'package:not_uygulamasi/widgets/card_design.dart';
+import 'package:not_uygulamasi/widgets/myalertdialog.dart';
 
 class ArchiveNormalPage extends StatefulWidget {
   const ArchiveNormalPage(this.db, {Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class _ArchiveNormalPageState extends State<ArchiveNormalPage> {
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                  text: "Henüz Arşivinde hiç not yok.\nArşivine not eklemek için ",
+                  text: "noarch".tr,
                   style: TextStyle(
                     color: Colors.black, 
                     fontSize: Get.width * 0.04,
@@ -41,7 +42,7 @@ class _ArchiveNormalPageState extends State<ArchiveNormalPage> {
                         size: Get.width * 0.06,
                       ),
                       ),
-                    const TextSpan(text: " butonuna bas.")
+                    TextSpan(text: "clickbut".tr)
                   ]
                 ))
               )
@@ -63,6 +64,11 @@ class _ArchiveNormalPageState extends State<ArchiveNormalPage> {
               onTap: (() {
                 Get.to(EditNote(data: snapshot.data.docs[index]));
               }),
+              onLongPress: () => longAlert(
+                snapshot.data.docs[index].data()["baslik"].toString(),
+                snapshot.data.docs[index].data()["icerik"].toString(),
+                snapshot.data.docs[index]
+              ),
               child: CardDesign(
                 snapshot.data.docs[index].data()["baslik"].toString(),
                 snapshot.data.docs[index].data()["icerik"].toString()

@@ -26,9 +26,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
           size: Get.width * 0.07,
         )
       ),
-      title: const Text(
-        'Note Taking App',
-        style: TextStyle(
+      title: Text(
+        'appname'.tr,
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           shadows: <Shadow>[
             Shadow(

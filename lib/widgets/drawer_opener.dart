@@ -2,9 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:not_uygulamasi/controllers/controller_select.dart';
-import 'package:not_uygulamasi/main.dart';
 import 'package:not_uygulamasi/pages/pageviewpage.dart';
 import 'package:not_uygulamasi/service/auth.dart';
+import 'package:not_uygulamasi/themes/normaltheme.dart';
+import 'package:not_uygulamasi/widgets/changelang.dart';
 
 class DrawerOpener extends StatefulWidget {
   const DrawerOpener(this.db, {
@@ -80,25 +81,20 @@ class _DrawerOpenerState extends State<DrawerOpener> {
                             Get.changeTheme(Get.isDarkMode ? themeDataApp(): ThemeData.dark());
                           },
                           leading: const Icon(Icons.dark_mode_outlined),
-                          title: const Text('Karanlık Tema'),
+                          title: Text('dark'.tr),
                         ),
-                        ListTile(
-                          onTap: () {
-                            print(_authService.infouser());
-                          },
-                          leading: const Icon(Icons.language_rounded),
-                          title: const Text('Dili Değiştir'),
-                        ),
+                        const ChangeLang(),
                         ListTile(
                           onTap: (() {
                             _authService.signOut().whenComplete((){
+                              Get.changeTheme(themeDataApp());
                               Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) {
                                 return const PageViewDesign();
                               })));
                             });
                           }),
                           leading: const Icon(Icons.logout_rounded),
-                          title: const Text('Çıkış Yap'),
+                          title: Text('out'.tr),
                         ),
                         const Spacer(),
                         DefaultTextStyle(
@@ -110,7 +106,7 @@ class _DrawerOpenerState extends State<DrawerOpener> {
                             margin: const EdgeInsets.symmetric(
                               vertical: 16.0,
                             ),
-                            child: const Text('Terms of Service | Privacy Policy'),
+                            child: Text('terms'.tr),
                           ),
                         ),
                       ],
@@ -167,25 +163,20 @@ class _DrawerOpenerState extends State<DrawerOpener> {
                             Get.changeTheme(Get.isDarkMode ? themeDataApp(): ThemeData.dark());
                           },
                           leading: const Icon(Icons.dark_mode_rounded),
-                          title: const Text('Aydınlık Tema'),
+                          title: Text('light'.tr),
                         ),
-                        ListTile(
-                          onTap: () {
-                            print(_authService.infouser());
-                          },
-                          leading: const Icon(Icons.language_rounded),
-                          title: const Text('Dili Değiştir'),
-                        ),
+                        const ChangeLang(),
                         ListTile(
                           onTap: (() {
                             _authService.signOut().whenComplete((){
+                              Get.changeTheme(themeDataApp());
                               Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) {
                                 return const PageViewDesign();
                               })));
                             });
                           }),
                           leading: const Icon(Icons.logout_rounded),
-                          title: const Text('Çıkış Yap'),
+                          title: Text('out'.tr),
                         ),
                         const Spacer(),
                         DefaultTextStyle(
@@ -197,7 +188,7 @@ class _DrawerOpenerState extends State<DrawerOpener> {
                             margin: const EdgeInsets.symmetric(
                               vertical: 16.0,
                             ),
-                            child: const Text('Terms of Service | Privacy Policy'),
+                            child: Text('terms'.tr),
                           ),
                         ),
                       ],

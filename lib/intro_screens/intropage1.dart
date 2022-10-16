@@ -14,11 +14,11 @@ class IntroPage1 extends StatelessWidget {
           children: [
             SizedBox(height: Get.width * 0.3),
             Text(
-              "YOĞUN GEÇEN GÜNLERDE YAPMAN GEREKENLERİ UNUTMAK ÇOK MU SIKICI",
+              "s1text".tr,
               style: GoogleFonts.nunito(
                 textStyle: TextStyle(
                   fontSize: Get.width * 0.045,
-                  color: Color.fromARGB(255, 42, 79, 97),
+                  color: const Color.fromARGB(255, 42, 79, 97),
                   fontWeight: FontWeight.w800,
                   shadows: const <Shadow>[
                     Shadow(

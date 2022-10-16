@@ -43,7 +43,7 @@ class _PageViewDesignState extends State<PageViewDesign> {
           ],
         ),
         Container(
-          alignment: Alignment(0, 0.85),
+          alignment: const Alignment(0, 0.85),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

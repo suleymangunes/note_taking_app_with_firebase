@@ -31,8 +31,8 @@ class AddPageAppBar extends StatelessWidget with PreferredSizeWidget {
                 Get.snackbar(
                 "",
                 "",
-                titleText: const Text("Boş Not Olamaz."),
-                messageText: const Text("Kaydetmek için bir şeyler yazın."),
+                titleText: Text("noempty".tr),
+                messageText: Text("someforsave".tr),
                 icon: const Icon(Icons.warning_amber_rounded, color: Colors.yellow),
                 backgroundColor: Colors.white,
                 snackPosition: SnackPosition.TOP,
@@ -52,8 +52,8 @@ class AddPageAppBar extends StatelessWidget with PreferredSizeWidget {
                     whenComplete(() => Get.snackbar(
                       "",
                       "",
-                      titleText: const Text("Yeni Not Eklendi"),
-                      messageText: const Text("Notlarım Sayfasında Bulabilirsin."),
+                      titleText: Text("notenewadd".tr),
+                      messageText: Text("findnote".tr),
                       icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
                       backgroundColor: Colors.white,
                       snackPosition: SnackPosition.TOP,
@@ -70,8 +70,8 @@ class AddPageAppBar extends StatelessWidget with PreferredSizeWidget {
                     whenComplete(() => Get.snackbar(
                       "",
                       "",
-                      titleText: const Text("Yeni Not Eklendi"),
-                      messageText: const Text("Notlarım Sayfasında Bulabilirsin."),
+                      titleText: Text("notenewadd".tr),
+                      messageText: Text("findnote".tr),
                       icon: const Icon(Icons.done_outline_rounded, color: Colors.green),
                       backgroundColor: Colors.white,
                       snackPosition: SnackPosition.TOP,
@@ -93,4 +93,3 @@ class AddPageAppBar extends StatelessWidget with PreferredSizeWidget {
     );
   }
 }
-

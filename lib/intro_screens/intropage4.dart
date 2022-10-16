@@ -14,7 +14,7 @@ class IntroPage4 extends StatelessWidget {
           children: [
             SizedBox(height: Get.width * 0.15),
             Text(
-              "SADECE TEK TIK İLE NOT ALMAYA NE DERSİN !",
+              "s4text".tr,
               style: GoogleFonts.nunito(
                 textStyle: TextStyle(
                   fontSize: Get.width * 0.055,

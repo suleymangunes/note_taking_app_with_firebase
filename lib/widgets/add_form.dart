@@ -28,14 +28,14 @@ class AddForm extends StatelessWidget {
                   fontSize: Get.width * 0.07
                 ),
                 maxLines: null,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: "Title",
+                  hintText: "baslik".tr,
                 ),
                 controller: title,
                 validator: ((value) {
                   if (title.text.isEmpty) {
-                    return 'Please enter some text';
+                    return 'textenter'.tr;
                   }
                   return null;
                 }),
@@ -55,14 +55,14 @@ class AddForm extends StatelessWidget {
                   fontSize: Get.width * 0.05
                 ),
                 maxLines: null,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 border: InputBorder.none,
-                hintText: "Note"
+                hintText: "not".tr
               ),
               controller: note,
               validator: ((value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'textenter'.tr;
                 }
                 return null;
               }),

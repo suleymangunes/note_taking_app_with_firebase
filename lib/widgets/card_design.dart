@@ -92,6 +92,5 @@ class CardDesign extends StatelessWidget {
       ),
     );
     }));
-      
   }
 }

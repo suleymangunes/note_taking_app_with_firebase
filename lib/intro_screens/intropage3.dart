@@ -14,7 +14,7 @@ class IntroPage3 extends StatelessWidget {
           children: [
             SizedBox(height: Get.width * 0.3),
             Text(
-              "DAHA FAZLA AKLININ KARIŞMASINA İZİN VERME SENİN İÇİN SORUNU ÇÖZDÜM",
+              "s3text".tr,
               style: GoogleFonts.nunito(
                 textStyle: TextStyle(
                   fontSize: Get.width * 0.04,

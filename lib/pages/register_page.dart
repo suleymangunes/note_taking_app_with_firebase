@@ -37,7 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 SizedBox(
                   width: Get.width * 0.5,
-                  child: Image.asset("images/apple1.png")),
+                  child: Image.asset("images/appleb.png")),
                 SizedBox(
                   height: Get.height * 0.08,
                 ),
@@ -45,12 +45,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   width: Get.width * 0.8,
                   child: TextFormField(
                     controller: controllerName,
-                    decoration: const InputDecoration(
-                      hintText: "İsim ve Soyisim"
+                    decoration: InputDecoration(
+                      hintText: "namesur".tr
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'İsim alanı boş olamaz.';
+                        return 'notnullname'.tr;
                       }
                       return null;
                     },
@@ -65,7 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Email alanı boş olamaz.';
+                        return 'emaildont'.tr;
                       }
                       return EmailValidator.validate(value) ? null : "Please enter a valid email";
                     },
@@ -78,15 +78,15 @@ class _RegisterPageState extends State<RegisterPage> {
                     enableSuggestions: false,
                     autocorrect: false,
                     controller: controllerPassword,
-                    decoration: const InputDecoration(
-                      hintText: "Şifre"
+                    decoration: InputDecoration(
+                      hintText: "passw".tr
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Şifre alanı boş olamaz.';
+                        return 'passwdont'.tr;
                       }
                       else if(controllerPassword.text.length < 8){
-                        return 'Şifre 8 karakterden fazla olmalıdır.';
+                        return 'pass8'.tr;
                       }
                       return null;
                     },
@@ -99,18 +99,18 @@ class _RegisterPageState extends State<RegisterPage> {
                     enableSuggestions: false,
                     autocorrect: false,
                     controller: controllerPasswordAgain,
-                    decoration: const InputDecoration(
-                      hintText: "Şifre Tekrar"
+                    decoration: InputDecoration(
+                      hintText: "passag".tr
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Şifre alanı boş olamaz.';
+                        return 'passwdont'.tr;
                       }
                       if(controllerPassword.text != controllerPasswordAgain.text){
-                        return 'Şifreler aynı olmalıdır.';
+                        return 'passame'.tr;
                       }
                       else if(controllerPasswordAgain.text.length < 8){
-                        return 'Şifre 8 karakterden fazla olmalıdır.';
+                        return 'pass8'.tr;
                       }
                       return null;
                     },
@@ -131,8 +131,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       Get.snackbar(
                         "", 
                         "",
-                        titleText: const Text("Kaydolma işlemi tamamladı"),
-                        messageText: const Text("Lütfen Giriş Yapın"),
+                        titleText: Text("regok".tr),
+                        messageText: Text("plsign".tr),
                         icon: const Icon(Icons.done, color: Colors.green),
                         backgroundColor: Colors.white,
                         snackPosition: SnackPosition.TOP,
@@ -147,7 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   child: _isLoading
                       ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2,)
-                      : const Text("Kaydol"),
+                      : Text("reg".tr),
                 ),
               ],
             ),
