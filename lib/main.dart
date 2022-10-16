@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
       title: 'Not Uygulamasi',
       translations: Messages(),
       locale: const Locale("tr", "TR"),
-      // locale: const Locale("en", "US"),
       debugShowCheckedModeBanner: false,
       theme: themeDataApp(),
       home:

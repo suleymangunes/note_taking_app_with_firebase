@@ -78,7 +78,7 @@ class _DrawerOpenerState extends State<DrawerOpener> {
                             }else{
                               controllerSelect.themeDark.value = false;
                             }
-                            Get.changeTheme(Get.isDarkMode ? themeDataApp(): ThemeData.dark());
+                            Get.changeTheme(controllerSelect.themeDark.value == false? themeDataApp(): ThemeData.dark());
                           },
                           leading: const Icon(Icons.dark_mode_outlined),
                           title: Text('dark'.tr),
@@ -160,7 +160,7 @@ class _DrawerOpenerState extends State<DrawerOpener> {
                             }else{
                               controllerSelect.themeDark.value = false;
                             }
-                            Get.changeTheme(Get.isDarkMode ? themeDataApp(): ThemeData.dark());
+                            Get.changeTheme(controllerSelect.themeDark.value == false ? themeDataApp(): ThemeData.dark());
                           },
                           leading: const Icon(Icons.dark_mode_rounded),
                           title: Text('light'.tr),
@@ -177,6 +177,12 @@ class _DrawerOpenerState extends State<DrawerOpener> {
                           }),
                           leading: const Icon(Icons.logout_rounded),
                           title: Text('out'.tr),
+                        ),
+                        ListTile(
+                          onTap: () {
+                            print(Get.isDarkMode);
+                          },
+                          title: Text("tikla"),
                         ),
                         const Spacer(),
                         DefaultTextStyle(

@@ -12,7 +12,7 @@ class IntroPage1 extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: Get.width * 0.3),
+            SizedBox(height: Get.height * 0.2),
             Text(
               "s1text".tr,
               style: GoogleFonts.nunito(
@@ -31,7 +31,7 @@ class IntroPage1 extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: Get.width * 0.12),
+            SizedBox(height: Get.height * 0.15),
             Lottie.asset("animations/s1.zip")
           ],
         ),

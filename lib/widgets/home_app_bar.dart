@@ -26,17 +26,20 @@ class _HomeAppBarState extends State<HomeAppBar> {
           size: Get.width * 0.07,
         )
       ),
-      title: Text(
-        'appname'.tr,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          shadows: <Shadow>[
-            Shadow(
-              offset: Offset(1.0, 1.0),
-              blurRadius: 2.0,
-              color: Colors.blueGrey,
-            ),
-          ],
+      title: FittedBox(
+        fit: BoxFit.cover,
+        child: Text(
+          'appname'.tr,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            shadows: <Shadow>[
+              Shadow(
+                offset: Offset(1.0, 1.0),
+                blurRadius: 2.0,
+                color: Colors.blueGrey,
+              ),
+            ],
+          ),
         ),
       ),
       actions: [

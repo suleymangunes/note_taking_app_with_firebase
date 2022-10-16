@@ -33,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               children: [
                 SizedBox(
-                  height: Get.height * 0.1,
+                  height: Get.height * 0.15,
                 ),
                 SizedBox(
                   width: Get.width * 0.5,

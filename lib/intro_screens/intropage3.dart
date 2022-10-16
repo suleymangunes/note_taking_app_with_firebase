@@ -12,12 +12,12 @@ class IntroPage3 extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: Get.width * 0.3),
+            SizedBox(height: Get.height * 0.2),
             Text(
               "s3text".tr,
               style: GoogleFonts.nunito(
                 textStyle: TextStyle(
-                  fontSize: Get.width * 0.04,
+                  fontSize: Get.width * 0.045,
                   color: const Color.fromARGB(255, 42, 79, 97),
                   fontWeight: FontWeight.w800,
                   shadows: const <Shadow>[
@@ -31,7 +31,7 @@ class IntroPage3 extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: Get.width * 0.12),
+            SizedBox(height: Get.height * 0.1),
             Lottie.asset("animations/s3.zip")
           ],
         ),
