@@ -1,6 +1,17 @@
 # Note Taking App
 
-A new Flutter project.
+- Intro Page
+- Authentication
+- Registration
+- Backend (Firabae)
+- 2 Language
+- Dark Mode
+- Add Note
+- Delete Note
+- Archive Note
+- Update Note
+
+https://user-images.githubusercontent.com/62201710/196179212-e39e8643-ba03-432e-8548-9891a5c93b5a.mp4
 
 ## Getting Started
 
